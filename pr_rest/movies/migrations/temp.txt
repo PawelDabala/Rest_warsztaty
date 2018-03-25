@@ -1,19 +1,8 @@
-from django.http import Http404, request
-from django.shortcuts import render
+lass MoviesView(APIView):
 
-# Create your views here.
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from .models import Person, Movie
-from .serializers import PersonSerializer, MovieSerializer
-from rest_framework import status
-
-
-class MoviesView(APIView):
-
-    def get(self, requst,format=None):
+    def get(self, request, format=None):
         movies = Movie.objects.all()
-        serializer = MovieSerializer(movies,many=True, context={"request":request})
+        serializer = MovieSerializer(movies, many=True, context={"request": request})
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -52,6 +41,7 @@ class MovieView(APIView):
 
     def post(self, request, id, format=None):
         pass
+
 
 class PersonsView(APIView):
 
